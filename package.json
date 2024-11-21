@@ -6,10 +6,10 @@
   "author": "Devmachine",
   "license": "MIT",
   "scripts": {
-    "start": "npm run dev",
+    "start": "cross-env NODE_ENV=development node build/index.js",
     "build": "npm run clean && npm run build-babel",
     "build-babel": "babel -d ./build ./src -s",
-    "clean": "rm -rf build && mkdir build",
+    "clean": "if exist build (rmdir /s /q build) && mkdir build",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend",
     "dev": "cross-env NODE_ENV=development && nodemon --exec babel-node index.js",
     "lint": "eslint .",
@@ -18,10 +18,7 @@
     "prettier:fix": "prettier --write **/*.js"
   },
   "dependencies": {
-    "@babel/cli": "^7.19.3",
-    "@babel/core": "^7.19.3",
     "@babel/node": "^7.19.1",
-    "@babel/preset-env": "^7.19.4",
     "@langchain/openai": "^0.0.14",
     "@langchain/pinecone": "^0.0.3",
     "@pinecone-database/pinecone": "^1.1.2",
@@ -31,7 +28,6 @@
     "cheerio": "^1.0.0-rc.12",
     "compression": "^1.7.4",
     "cors": "^2.8.5",
-    "cross-env": "^7.0.0",
     "crypto": "^1.0.1",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
@@ -78,7 +74,11 @@
     "xss-clean": "^0.1.1"
   },
   "devDependencies": {
+    "@babel/cli": "^7.25.9",
+    "@babel/core": "^7.26.0",
+    "@babel/preset-env": "^7.26.0",
     "coveralls": "^3.0.7",
+    "cross-env": "^7.0.3",
     "eslint": "^7.0.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-config-prettier": "^8.1.0",
