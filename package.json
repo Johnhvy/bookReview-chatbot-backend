@@ -9,7 +9,7 @@
     "start": "cross-env NODE_ENV=development node build/index.js",
     "build": "npm run clean && npm run build-babel",
     "build-babel": "babel -d ./build ./src -s",
-    "clean": "if exist build (rmdir /s /q build) && mkdir build",
+    "clean": "rimraf build && mkdir build",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend",
     "dev": "cross-env NODE_ENV=development && nodemon --exec babel-node index.js",
     "lint": "eslint .",
@@ -89,6 +89,7 @@
     "jest": "^26.0.1",
     "node-mocks-http": "^1.8.0",
     "prettier": "^2.0.5",
+    "rimraf": "^6.0.1",
     "supertest": "^6.0.1"
   },
   "babel": {
